@@ -1,0 +1,26 @@
+[package]
+name = "abcd"
+version = "0.1.0"
+authors = ["Wim Looman <wim@nemo157.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+runtime = "0.3.0-alpha.4"
+runtime-tokio = "0.3.0-alpha.4"
+
+tide = "0.2.0"
+tide-slog = { git = "https://github.com/Nemo157/tide", branch = "provide-slog-logger" }
+
+slog-term = "2.4.0"
+slog-async = "2.3.0"
+slog = "2.4.1"
+serde = { version = "1.0.91", features = ["derive"] }
+
+[patch.crates-io]
+http-service = { git = "https://github.com/rustasync/http-service", branch = "master" }
+http-service-hyper = { git = "https://github.com/rustasync/http-service", branch = "master" }
+http-service-mock = { git = "https://github.com/rustasync/http-service", branch = "master" }
+
+tide = { git = "https://github.com/Nemo157/tide", branch = "provide-slog-logger" }
