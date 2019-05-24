@@ -10,12 +10,16 @@ edition = "2018"
 runtime = "0.3.0-alpha.4"
 runtime-tokio = "0.3.0-alpha.4"
 
+http = "0.1.17"
+http-service = "0.2.0"
+
 tide = "0.2.0"
 tide-slog = { git = "https://github.com/Nemo157/tide", branch = "provide-slog-logger" }
 
 slog-term = "2.4.0"
 slog-async = "2.3.0"
 slog = "2.4.1"
+
 serde = { version = "1.0.91", features = ["derive"] }
 
 [patch.crates-io]
