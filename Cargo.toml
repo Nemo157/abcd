@@ -6,43 +6,60 @@ edition = "2018"
 
 [dependencies.bs58]
 version = "0.2.2"
+default-features = false
 [dependencies.chrono]
 version = "0.4.6"
+default-features = false
 features = ["serde"]
 [dependencies.http]
 version = "0.1.17"
+default-features = false
 [dependencies.http-service]
 version = "0.2.0"
+default-features = false
 [dependencies.mime]
 version = "0.3.13"
+default-features = false
 [dependencies.runtime]
 version = "0.3.0-alpha.4"
+default-features = false
 [dependencies.runtime-tokio]
 version = "0.3.0-alpha.4"
+default-features = false
 [dependencies.serde]
 version = "1.0.91"
+default-features = false
 features = ["derive"]
 [dependencies.serde_json]
 version = "1.0.39"
+default-features = false
 [dependencies.serde_urlencoded]
 version = "0.5.5"
+default-features = false
 [dependencies.slog]
 version = "2.4.1"
+default-features = false
 features = ["max_level_trace", "release_max_level_info"]
 [dependencies.slog-async]
 version = "2.3.0"
+default-features = false
 [dependencies.slog-bunyan]
 version = "2.1.0"
+default-features = false
 [dependencies.slog-scope]
 version = "4.1.1"
+default-features = false
 [dependencies.slog-stdlog]
 version = "3.0.2"
+default-features = false
 [dependencies.tide]
 git = "https://github.com/Nemo157/tide"
 branch = "slog-per-request-logger"
+default-features = false
 [dependencies.tide-slog]
 git = "https://github.com/Nemo157/tide"
 branch = "slog-per-request-logger"
+default-features = false
 features = ["slog-scope"]
 [dependencies.uuid]
 version = "0.7.4"
