@@ -13,6 +13,8 @@ pub fn setup(app: &mut tide::App<()>) {
         .post(authn::login);
 
     app.at("/api/v1/apps").post(authn::register_app);
+    app.at("/api/v1/accounts/verify_credentials").get(authn::verify);
 
     app.at("/oauth/authorize").get(authn::authorize);
+    app.at("/oauth/token").post(authn::token);
 }
