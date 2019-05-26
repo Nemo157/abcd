@@ -28,12 +28,12 @@ version = "2.4.1"
 features = ["max_level_trace", "release_max_level_info"]
 [dependencies.slog-async]
 version = "2.3.0"
+[dependencies.slog-bunyan]
+version = "2.1.0"
 [dependencies.slog-scope]
 version = "4.1.1"
 [dependencies.slog-stdlog]
 version = "3.0.2"
-[dependencies.slog-term]
-version = "2.4.0"
 [dependencies.tide]
 git = "https://github.com/Nemo157/tide"
 branch = "slog-per-request-logger"
