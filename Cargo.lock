@@ -4,8 +4,10 @@
 name = "abcd"
 version = "0.1.0"
 dependencies = [
+ "bs58 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http-service 0.2.0 (git+https://github.com/rustasync/http-service)",
+ "mime 0.3.13 (registry+https://github.com/rust-lang/crates.io-index)",
  "runtime 0.3.0-alpha.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "runtime-tokio 0.3.0-alpha.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.91 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -13,9 +15,12 @@ dependencies = [
  "serde_urlencoded 0.5.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "slog 2.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "slog-async 2.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "slog-scope 4.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "slog-stdlog 3.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "slog-term 2.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "tide 0.2.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)",
- "tide-slog 0.1.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)",
+ "tide 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
+ "tide-slog 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
+ "uuid 0.7.4 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -160,6 +165,11 @@ dependencies = [
  "time 0.1.42 (registry+https://github.com/rust-lang/crates.io-index)",
  "url 1.7.2 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
+
+[[package]]
+name = "crossbeam"
+version = "0.2.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "crossbeam"
@@ -615,6 +625,14 @@ version = "0.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "log 0.3.9 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "mime"
+version = "0.3.13"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "unicase 2.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -1159,6 +1177,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "slog-scope"
+version = "4.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "crossbeam 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "lazy_static 1.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "slog 2.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "slog-stdlog"
+version = "3.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "crossbeam 0.2.12 (registry+https://github.com/rust-lang/crates.io-index)",
+ "log 0.3.9 (registry+https://github.com/rust-lang/crates.io-index)",
+ "slog 2.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "slog-scope 4.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "slog-term"
 version = "2.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1245,7 +1284,7 @@ dependencies = [
 [[package]]
 name = "tide"
 version = "0.2.0"
-source = "git+https://github.com/Nemo157/tide?branch=provide-slog-logger#c69aee2dc1b5a417265dcf9e724a9454946e7be9"
+source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1fcf02db04a9d5dc3142597de1b527a99ea70c2e"
 dependencies = [
  "futures-preview 0.3.0-alpha.16 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1254,28 +1293,28 @@ dependencies = [
  "serde 1.0.91 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_derive 1.0.91 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_urlencoded 0.5.5 (registry+https://github.com/rust-lang/crates.io-index)",
- "tide-cookies 0.2.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)",
- "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)",
- "tide-headers 0.1.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)",
- "tide-log 0.1.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)",
+ "tide-cookies 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
+ "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
+ "tide-headers 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
+ "tide-log 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
 ]
 
 [[package]]
 name = "tide-cookies"
 version = "0.2.0"
-source = "git+https://github.com/Nemo157/tide?branch=provide-slog-logger#c69aee2dc1b5a417265dcf9e724a9454946e7be9"
+source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1fcf02db04a9d5dc3142597de1b527a99ea70c2e"
 dependencies = [
  "cookie 0.12.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "futures-preview 0.3.0-alpha.16 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http-service 0.2.0 (git+https://github.com/rustasync/http-service)",
- "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)",
+ "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
 ]
 
 [[package]]
 name = "tide-core"
 version = "0.2.0"
-source = "git+https://github.com/Nemo157/tide?branch=provide-slog-logger#c69aee2dc1b5a417265dcf9e724a9454946e7be9"
+source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1fcf02db04a9d5dc3142597de1b527a99ea70c2e"
 dependencies = [
  "fnv 1.0.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "futures-preview 0.3.0-alpha.16 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1290,39 +1329,35 @@ dependencies = [
 [[package]]
 name = "tide-headers"
 version = "0.1.0"
-source = "git+https://github.com/Nemo157/tide?branch=provide-slog-logger#c69aee2dc1b5a417265dcf9e724a9454946e7be9"
+source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1fcf02db04a9d5dc3142597de1b527a99ea70c2e"
 dependencies = [
  "futures-preview 0.3.0-alpha.16 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "log 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)",
+ "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
 ]
 
 [[package]]
 name = "tide-log"
 version = "0.1.0"
-source = "git+https://github.com/Nemo157/tide?branch=provide-slog-logger#c69aee2dc1b5a417265dcf9e724a9454946e7be9"
+source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1fcf02db04a9d5dc3142597de1b527a99ea70c2e"
 dependencies = [
  "futures-preview 0.3.0-alpha.16 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "log 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)",
+ "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
 ]
 
 [[package]]
 name = "tide-slog"
 version = "0.1.0"
-source = "git+https://github.com/Nemo157/tide?branch=provide-slog-logger#c69aee2dc1b5a417265dcf9e724a9454946e7be9"
+source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1fcf02db04a9d5dc3142597de1b527a99ea70c2e"
 dependencies = [
- "bs58 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "futures-preview 0.3.0-alpha.16 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
- "log 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "slog 2.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "slog-async 2.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "slog-term 2.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)",
- "uuid 0.7.4 (registry+https://github.com/rust-lang/crates.io-index)",
+ "slog-scope 4.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
 ]
 
 [[package]]
@@ -1545,6 +1580,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "unicase"
+version = "2.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "version_check 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "unicode-bidi"
 version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1720,6 +1763,7 @@ source = "git+https://github.com/rustasync/http-service#09cce75cbc2188995f40591e
 "checksum cloudabi 0.0.3 (registry+https://github.com/rust-lang/crates.io-index)" = "ddfc5b9aa5d4507acaf872de71051dfd0e309860e88966e1051e462a077aac4f"
 "checksum constant_time_eq 0.1.3 (registry+https://github.com/rust-lang/crates.io-index)" = "8ff012e225ce166d4422e0e78419d901719760f62ae2b7969ca6b564d1b54a9e"
 "checksum cookie 0.12.0 (registry+https://github.com/rust-lang/crates.io-index)" = "888604f00b3db336d2af898ec3c1d5d0ddf5e6d462220f2ededc33a87ac4bbd5"
+"checksum crossbeam 0.2.12 (registry+https://github.com/rust-lang/crates.io-index)" = "bd66663db5a988098a89599d4857919b3acf7f61402e61365acfd3919857b9be"
 "checksum crossbeam 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)" = "ad4c7ea749d9fb09e23c5cb17e3b70650860553a0e2744e38446b1803bf7db94"
 "checksum crossbeam-channel 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)" = "0f0ed1a4de2235cabda8558ff5840bffb97fcb64c97827f354a451307df5f72b"
 "checksum crossbeam-deque 0.6.3 (registry+https://github.com/rust-lang/crates.io-index)" = "05e44b8cf3e1a625844d1750e1f7820da46044ff6d28f4d43e455ba3e5bb2c13"
@@ -1770,6 +1814,7 @@ source = "git+https://github.com/rustasync/http-service#09cce75cbc2188995f40591e
 "checksum memchr 2.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = "2efc7bc57c883d4a4d6e3246905283d8dae951bb3bd32f49d6ef297f546e1c39"
 "checksum memoffset 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)" = "0f9dc261e2b62d7a622bf416ea3c5245cdd5d9a7fcc428c0d06804dfce1775b3"
 "checksum mime 0.2.6 (registry+https://github.com/rust-lang/crates.io-index)" = "ba626b8a6de5da682e1caa06bdb42a335aee5a84db8e5046a3e8ab17ba0a3ae0"
+"checksum mime 0.3.13 (registry+https://github.com/rust-lang/crates.io-index)" = "3e27ca21f40a310bd06d9031785f4801710d566c184a6e15bad4f1d9b65f9425"
 "checksum mime_guess 1.8.7 (registry+https://github.com/rust-lang/crates.io-index)" = "0d977de9ee851a0b16e932979515c0f3da82403183879811bc97d50bd9cc50f7"
 "checksum mio 0.6.17 (registry+https://github.com/rust-lang/crates.io-index)" = "049ba5ca2b63e837adeee724aa9e36b408ed593529dcc802aa96ca14bd329bdf"
 "checksum mio-uds 0.6.7 (registry+https://github.com/rust-lang/crates.io-index)" = "966257a94e196b11bb43aca423754d87429960a768de9414f3691d6957abf125"
@@ -1832,6 +1877,8 @@ source = "git+https://github.com/rustasync/http-service#09cce75cbc2188995f40591e
 "checksum slab 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)" = "c111b5bd5695e56cffe5129854aa230b39c93a305372fdbb2668ca2394eea9f8"
 "checksum slog 2.4.1 (registry+https://github.com/rust-lang/crates.io-index)" = "1e1a2eec401952cd7b12a84ea120e2d57281329940c3f93c2bf04f462539508e"
 "checksum slog-async 2.3.0 (registry+https://github.com/rust-lang/crates.io-index)" = "e544d16c6b230d84c866662fe55e31aacfca6ae71e6fc49ae9a311cb379bfc2f"
+"checksum slog-scope 4.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "60c04b4726fa04595ccf2c2dad7bcd15474242c4c5e109a8a376e8a2c9b1539a"
+"checksum slog-stdlog 3.0.2 (registry+https://github.com/rust-lang/crates.io-index)" = "ac42f8254ae996cc7d640f9410d3b048dcdf8887a10df4d5d4c44966de24c4a8"
 "checksum slog-term 2.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = "5951a808c40f419922ee014c15b6ae1cd34d963538b57d8a4778b9ca3fff1e0b"
 "checksum smallvec 0.6.9 (registry+https://github.com/rust-lang/crates.io-index)" = "c4488ae950c49d403731982257768f48fada354a5203fe81f9bb6f43ca9002be"
 "checksum stable_deref_trait 1.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "dba1a27d3efae4351c8051072d619e3ade2820635c3958d826bfea39d59b54c8"
@@ -1842,12 +1889,12 @@ source = "git+https://github.com/rustasync/http-service#09cce75cbc2188995f40591e
 "checksum tempfile 3.0.8 (registry+https://github.com/rust-lang/crates.io-index)" = "7dc4738f2e68ed2855de5ac9cdbe05c9216773ecde4739b2f095002ab03a13ef"
 "checksum term 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)" = "edd106a334b7657c10b7c540a0106114feadeb4dc314513e97df481d5d966f42"
 "checksum thread_local 0.3.6 (registry+https://github.com/rust-lang/crates.io-index)" = "c6b53e329000edc2b34dbe8545fd20e55a333362d0a321909685a19bd28c3f1b"
-"checksum tide 0.2.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)" = "<none>"
-"checksum tide-cookies 0.2.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)" = "<none>"
-"checksum tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)" = "<none>"
-"checksum tide-headers 0.1.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)" = "<none>"
-"checksum tide-log 0.1.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)" = "<none>"
-"checksum tide-slog 0.1.0 (git+https://github.com/Nemo157/tide?branch=provide-slog-logger)" = "<none>"
+"checksum tide 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)" = "<none>"
+"checksum tide-cookies 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)" = "<none>"
+"checksum tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)" = "<none>"
+"checksum tide-headers 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)" = "<none>"
+"checksum tide-log 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)" = "<none>"
+"checksum tide-slog 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)" = "<none>"
 "checksum time 0.1.42 (registry+https://github.com/rust-lang/crates.io-index)" = "db8dcfca086c1143c9270ac42a2bbd8a7ee477b78ac8e45b19abfb0cbede4b6f"
 "checksum tokio 0.1.20 (registry+https://github.com/rust-lang/crates.io-index)" = "94a1f9396aec29d31bb16c24d155cfa144d1af91c40740125db3131bdaf76da8"
 "checksum tokio-buf 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "8fb220f46c53859a4b7ec083e41dec9778ff0b1851c0942b211edb89e0ccdc46"
@@ -1867,6 +1914,7 @@ source = "git+https://github.com/rustasync/http-service#09cce75cbc2188995f40591e
 "checksum try-lock 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)" = "e604eb7b43c06650e854be16a2a03155743d3752dd1c943f6829e26b7a36e382"
 "checksum twoway 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)" = "59b11b2b5241ba34be09c3cc85a36e56e48f9888862e19cedf23336d35316ed1"
 "checksum unicase 1.4.2 (registry+https://github.com/rust-lang/crates.io-index)" = "7f4765f83163b74f957c797ad9253caf97f103fb064d3999aea9568d09fc8a33"
+"checksum unicase 2.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = "a84e5511b2a947f3ae965dcb29b13b7b1691b6e7332cf5dbc1744138d5acb7f6"
 "checksum unicode-bidi 0.3.4 (registry+https://github.com/rust-lang/crates.io-index)" = "49f2bd0c6468a8230e1db229cff8029217cf623c767ea5d60bfbd42729ea54d5"
 "checksum unicode-normalization 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)" = "141339a08b982d942be2ca06ff8b076563cbe223d1befd5450716790d44e2426"
 "checksum unicode-xid 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "fc72304796d0818e357ead4e000d19c9c174ab23dc11093ac919054d20a6a7fc"

@@ -4,29 +4,54 @@ version = "0.1.0"
 authors = ["Wim Looman <wim@nemo157.com>"]
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies.bs58]
+version = "0.2.2"
+[dependencies.http]
+version = "0.1.17"
+[dependencies.http-service]
+version = "0.2.0"
+[dependencies.mime]
+version = "0.3.13"
+[dependencies.runtime]
+version = "0.3.0-alpha.4"
+[dependencies.runtime-tokio]
+version = "0.3.0-alpha.4"
+[dependencies.serde]
+version = "1.0.91"
+features = ["derive"]
+[dependencies.serde_json]
+version = "1.0.39"
+[dependencies.serde_urlencoded]
+version = "0.5.5"
+[dependencies.slog]
+version = "2.4.1"
+features = ["max_level_trace", "release_max_level_info"]
+[dependencies.slog-async]
+version = "2.3.0"
+[dependencies.slog-scope]
+version = "4.1.1"
+[dependencies.slog-stdlog]
+version = "3.0.2"
+[dependencies.slog-term]
+version = "2.4.0"
+[dependencies.tide]
+git = "https://github.com/Nemo157/tide"
+branch = "slog-per-request-logger"
+[dependencies.tide-slog]
+git = "https://github.com/Nemo157/tide"
+branch = "slog-per-request-logger"
+features = ["slog-scope"]
+[dependencies.uuid]
+version = "0.7.4"
+default-features = false
+features = ["v4"]
 
-[dependencies]
-runtime = "0.3.0-alpha.4"
-runtime-tokio = "0.3.0-alpha.4"
-
-http = "0.1.17"
-http-service = "0.2.0"
-
-tide = "0.2.0"
-tide-slog = { git = "https://github.com/Nemo157/tide", branch = "provide-slog-logger" }
-
-slog-term = "2.4.0"
-slog-async = "2.3.0"
-slog = "2.4.1"
-
-serde = { version = "1.0.91", features = ["derive"] }
-serde_json = "1.0.39"
-serde_urlencoded = "0.5.5"
-
-[patch.crates-io]
-http-service = { git = "https://github.com/rustasync/http-service", branch = "master" }
-http-service-hyper = { git = "https://github.com/rustasync/http-service", branch = "master" }
-http-service-mock = { git = "https://github.com/rustasync/http-service", branch = "master" }
-
-tide = { git = "https://github.com/Nemo157/tide", branch = "provide-slog-logger" }
+[patch.crates-io.http-service]
+git = "https://github.com/rustasync/http-service"
+branch = "master"
+[patch.crates-io.http-service-hyper]
+git = "https://github.com/rustasync/http-service"
+branch = "master"
+[patch.crates-io.http-service-mock]
+git = "https://github.com/rustasync/http-service"
+branch = "master"
