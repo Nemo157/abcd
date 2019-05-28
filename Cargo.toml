@@ -4,6 +4,10 @@ version = "0.1.0"
 authors = ["Wim Looman <wim@nemo157.com>"]
 edition = "2018"
 
+[dependencies]
+backtrace = "0.3.26"
+base64 = "0.10.1"
+
 [dependencies.bs58]
 version = "0.2.2"
 default-features = false
@@ -11,6 +15,9 @@ default-features = false
 version = "0.4.6"
 default-features = false
 features = ["serde"]
+[dependencies.futures-preview]
+version = "0.3.0-alpha.16"
+default-features = false
 [dependencies.http]
 version = "0.1.17"
 default-features = false
@@ -19,6 +26,9 @@ version = "0.2.0"
 default-features = false
 [dependencies.mime]
 version = "0.3.13"
+default-features = false
+[dependencies.oxide-auth]
+version = "0.4.2"
 default-features = false
 [dependencies.runtime]
 version = "0.3.0-alpha.4"
@@ -39,7 +49,7 @@ default-features = false
 [dependencies.slog]
 version = "2.4.1"
 default-features = false
-features = ["max_level_trace", "release_max_level_info"]
+features = ["max_level_debug", "release_max_level_info"]
 [dependencies.slog-async]
 version = "2.3.0"
 default-features = false

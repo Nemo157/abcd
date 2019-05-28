@@ -1,10 +1,8 @@
+use chrono::{DateTime, Utc};
 use serde::Serialize;
 use slog::debug;
-use tide::{
-    response::{self, IntoResponse},
-};
+use tide::response::{self, IntoResponse};
 use tide_slog::ContextExt as _;
-use chrono::{DateTime, Utc};
 
 #[derive(Serialize, Debug)]
 struct Account {
@@ -29,7 +27,9 @@ struct Account {
     bot: Option<()>,
 }
 
-pub async fn verify_credentials(cx: tide::Context<()>) -> tide::EndpointResult<impl IntoResponse> {
+pub async fn verify_credentials(
+    cx: tide::Context<crate::State>,
+) -> tide::EndpointResult<impl IntoResponse> {
     let response = Account {
         id: "5".into(),
         username: "username".into(),

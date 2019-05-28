@@ -1,3 +1,4 @@
+use oxide_auth::primitives::registrar::Client;
 use serde::{Deserialize, Serialize};
 use slog::debug;
 use tide::{
@@ -22,7 +23,9 @@ struct Application {
     client_secret: String,
 }
 
-pub async fn register(mut cx: tide::Context<()>) -> tide::EndpointResult<impl IntoResponse> {
+pub async fn register(
+    mut cx: tide::Context<crate::State>,
+) -> tide::EndpointResult<impl IntoResponse> {
     let data: RegisterData = cx.body_form().await?;
     let response = Application {
         name: data.client_name.clone(),
@@ -30,10 +33,23 @@ pub async fn register(mut cx: tide::Context<()>) -> tide::EndpointResult<impl In
         client_id: "foobar".to_owned(),
         client_secret: "barfoo".to_owned(),
     };
+    let client = Client::confidential(
+        &response.client_id,
+        data.redirect_uris
+            .split(",")
+            .next()
+            .unwrap()
+            .parse()
+            .unwrap(),
+        data.scopes.parse().unwrap(),
+        b"barfoo",
+    );
     debug!(cx.logger(), "app register";
            "path" => %cx.uri(),
            "data" => ?data,
+           "client" => ?client,
            "headers" => ?cx.headers(),
            "response" => ?response);
+    cx.state().registrar.lock().unwrap().register_client(client);
     Ok(response::json(response))
 }

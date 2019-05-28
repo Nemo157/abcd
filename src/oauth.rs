@@ -1,11 +1,6 @@
-use crate::util::{redirect, IntoResponseExt as _};
-use serde::{Deserialize, Serialize};
-use slog::debug;
-use tide::{
-    error::ResultExt as _,
-    forms::ContextExt as _,
-    response::{self, IntoResponse},
-};
+use serde::Deserialize;
+use slog::error;
+use tide::{error::ResultExt as _, response::IntoResponse};
 use tide_slog::ContextExt as _;
 
 #[derive(Deserialize, Debug)]
@@ -17,45 +12,137 @@ struct AuthorizeData {
     state: Option<String>,
 }
 
-#[derive(Deserialize, Debug)]
-struct TokenData {
-    grant_type: String,
-    code: String,
-    redirect_uri: String,
-    client_id: String,
+use http_service::Body;
+use oxide_auth::frontends::simple::request::{
+    Body as OAuthBody, Request as OAuthRequest, Response as OAuthResponse, Status as OAuthStatus,
+};
+use std::{collections::HashMap, io};
 
-    client_secret: String,
+async fn transform_request(
+    cx: &mut tide::Context<crate::State>,
+) -> Result<OAuthRequest, Box<dyn std::error::Error + Send + Sync>> {
+    let query = cx
+        .request()
+        .uri()
+        .query()
+        .map(serde_urlencoded::from_str)
+        .transpose()?
+        .unwrap_or_else(HashMap::new);
+    let mut urlbody: HashMap<String, String> =
+        serde_urlencoded::from_bytes(&cx.body_bytes().await?)?;
+    let auth = cx
+        .request()
+        .headers()
+        .get("Authorization")
+        .map(|v| v.to_str().map(|v| v.to_owned()))
+        .transpose()?;
+    // Workaround https://github.com/HeroicKatora/oxide-auth/issues/29
+    urlbody
+        .entry("redirect_uri".into())
+        .and_modify(|uri| uri.push_str("/"));
+    // Workaround https://github.com/HeroicKatora/oxide-auth/issues/28
+    let auth = auth.or_else(|| {
+        urlbody.remove("client_id").and_then(|id| {
+            urlbody
+                .remove("client_secret")
+                .map(|secret| format!("Basic {}", base64::encode(&format!("{}:{}", id, secret))))
+        })
+    });
+    Ok(OAuthRequest {
+        query,
+        urlbody,
+        auth,
+    })
 }
 
-#[derive(Serialize, Debug)]
-struct TokenResponse {
-    access_token: String,
-    token_type: String,
+fn transform_response(response: OAuthResponse) -> tide::Response {
+    let mut builder = http::Response::builder();
+    builder.status(match response.status {
+        OAuthStatus::Ok => http::status::StatusCode::OK,
+        OAuthStatus::Redirect => http::status::StatusCode::TEMPORARY_REDIRECT,
+        OAuthStatus::BadRequest => http::status::StatusCode::BAD_REQUEST,
+        OAuthStatus::Unauthorized => http::status::StatusCode::UNAUTHORIZED,
+    });
+    if let Some(location) = response.location {
+        builder.header("Location", location.to_string());
+    }
+    if let Some(www_authenticate) = response.www_authenticate {
+        builder.header("WWW-Authenticate", www_authenticate);
+    }
+    match response.body {
+        Some(OAuthBody::Text(text)) => {
+            builder.header("Content-Type", "text/plain");
+            builder.body(text.into()).unwrap()
+        }
+        Some(OAuthBody::Json(json)) => {
+            builder.header("Content-Type", "application/json");
+            builder.body(json.into()).unwrap()
+        }
+        None => {
+            builder.header("Content-Type", "text/plain");
+            builder.body(Body::empty()).unwrap()
+        }
+    }
 }
 
-pub async fn authorize(cx: tide::Context<()>) -> tide::EndpointResult<impl IntoResponse> {
-    let data: AuthorizeData = serde_urlencoded::from_str(cx.uri().query().unwrap()).client_err()?;
-    let location = data.redirect_uri.as_ref().unwrap().clone() + "?code=bazfoo";
-    debug!(cx.logger(), "oauth authorize";
-           "path" => %cx.uri(),
-           "data" => ?data,
-           "redirect" => ?location,
-           "headers" => ?cx.headers());
-    Ok("Redirecting...".with(redirect(&location).server_err()?))
+fn solicitor(
+    _: &mut OAuthRequest,
+    _: &oxide_auth::endpoint::PreGrant,
+) -> oxide_auth::endpoint::OwnerConsent<OAuthResponse> {
+    oxide_auth::endpoint::OwnerConsent::Authorized("bobby".to_owned())
 }
 
-pub async fn token(mut cx: tide::Context<()>) -> tide::EndpointResult<impl IntoResponse> {
-    let data: serde_json::Value = cx.body_form().await?;
-    debug!(cx.logger(), "oauth token data"; "data" => ?data);
-    let data: TokenData = serde_json::from_value(data).client_err()?;
-    let response = TokenResponse {
-        access_token: "foobaz".to_owned(),
-        token_type: "bearer".to_owned(),
+pub async fn authorize(
+    mut cx: tide::Context<crate::State>,
+) -> tide::EndpointResult<impl IntoResponse> {
+    let request = transform_request(&mut cx).await.unwrap();
+    let response = {
+        let crate::State {
+            registrar,
+            authorizer,
+            ..
+        } = cx.state();
+        let registrar = registrar.lock().unwrap();
+        let mut authorizer = authorizer.lock().unwrap();
+        let mut solicitor = oxide_auth::frontends::simple::endpoint::FnSolicitor(solicitor);
+        let mut flow = oxide_auth::frontends::simple::endpoint::authorization_flow(
+            &*registrar,
+            &mut authorizer,
+            &mut solicitor,
+        );
+        flow.execute(request.clone())
+            .map_err(|error| {
+                error!(cx.logger(), ""; "error" => ?error);
+                io::Error::new(io::ErrorKind::Other, "")
+            })
+            .client_err()?
     };
-    debug!(cx.logger(), "oauth token";
-           "path" => %cx.uri(),
-           "data" => ?data,
-           "response" => ?response,
-           "headers" => ?cx.headers());
-    Ok(response::json(response))
+    Ok(transform_response(response))
+}
+
+pub async fn token(mut cx: tide::Context<crate::State>) -> tide::EndpointResult<impl IntoResponse> {
+    let request = transform_request(&mut cx).await.unwrap();
+    let response = {
+        let crate::State {
+            registrar,
+            authorizer,
+            issuer,
+            ..
+        } = cx.state();
+        let registrar = registrar.lock().unwrap();
+        let mut authorizer = authorizer.lock().unwrap();
+        let mut issuer = issuer.lock().unwrap();
+        let mut flow = oxide_auth::frontends::simple::endpoint::access_token_flow(
+            &*registrar,
+            &mut authorizer,
+            &mut issuer,
+        );
+        flow.execute(request.clone())
+            .map_err(|error| {
+                error!(cx.logger(), ""; "error" => ?error);
+                io::Error::new(io::ErrorKind::Other, "")
+            })
+            .client_err()?
+    };
+    Ok(transform_response(response))
 }

@@ -1,7 +1,14 @@
+use futures::future::{BoxFuture, FutureExt, TryFutureExt};
 use http::{header::HeaderValue, status::StatusCode, Response};
 use http_service::Body;
 use mime::Mime;
-use tide::response::IntoResponse;
+use slog::error;
+use tide::{
+    middleware::{Middleware, Next},
+    response::IntoResponse,
+    Context,
+};
+use tide_slog::ContextExt;
 
 pub struct With<T, M> {
     response: T,
