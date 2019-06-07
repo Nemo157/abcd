@@ -32,6 +32,7 @@ pub fn setup(app: &mut tide::App<State>) {
     app.at("/").get(async move |_| "Hello, world!");
 
     app.at("/api/v1/apps").post(api::v1::app::register);
+    app.at("/api/v1/lists").get(api::v1::lists::mine);
     app.at("/api/v1/accounts/verify_credentials")
         .get(api::v1::account::verify_credentials);
 
