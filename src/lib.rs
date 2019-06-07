@@ -1,10 +1,15 @@
 #![feature(async_await, type_alias_enum_variants)]
 
+#[macro_use]
+extern crate diesel;
+
 use std::sync::Mutex;
 
 mod api;
 mod oauth;
 mod util;
+
+mod schema;
 
 pub struct State {
     registrar: Mutex<oxide_auth::primitives::registrar::ClientMap>,
