@@ -2,7 +2,7 @@
 
 use slog::{error, o, Drain};
 
-#[runtime::main(runtime_tokio::Tokio)]
+#[runtime::main]
 async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let drain = slog_async::Async::new(slog_bunyan::default(std::io::stdout()).fuse())
         .build()
@@ -52,7 +52,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     app.middleware(tide_slog::RequestLogger);
     abcd::setup(&mut app);
 
-    app.serve("127.0.0.1:8000").await?;
+    let mut listener = runtime::net::TcpListener::bind("127.0.0.1:8000")?;
+    http_service_hyper::Server::builder(listener.incoming())
+        .with_spawner(runtime::task::Spawner::new())
+        .serve(app.into_http_service())
+        .await?;
 
     Ok(())
 }

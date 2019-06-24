@@ -27,6 +27,9 @@ default-features = false
 [dependencies.http-service]
 version = "0.2.0"
 default-features = false
+[dependencies.http-service-hyper]
+version = "0.2.0"
+default-features = false
 [dependencies.mime]
 version = "0.3.13"
 default-features = false
@@ -34,11 +37,9 @@ default-features = false
 version = "0.4.2"
 default-features = false
 [dependencies.runtime]
-version = "0.3.0-alpha.4"
+version = "0.3.0-alpha.5"
 default-features = false
-[dependencies.runtime-tokio]
-version = "0.3.0-alpha.4"
-default-features = false
+features = ["native"]
 [dependencies.serde]
 version = "1.0.91"
 default-features = false
@@ -73,18 +74,21 @@ default-features = false
 git = "https://github.com/Nemo157/tide"
 branch = "slog-per-request-logger"
 default-features = false
-features = ["slog-scope"]
+features = ["scope"]
 [dependencies.uuid]
 version = "0.6.5"
 default-features = false
 features = ["v4"]
 
+[patch.crates-io.runtime]
+git = "https://github.com/Nemo157/runtime"
+branch = "provide-spawn-instance"
 [patch.crates-io.http-service]
-git = "https://github.com/rustasync/http-service"
-branch = "master"
+git = "https://github.com/Nemo157/http-service"
+branch = "executor-agnostic-hyper"
 [patch.crates-io.http-service-hyper]
-git = "https://github.com/rustasync/http-service"
-branch = "master"
+git = "https://github.com/Nemo157/http-service"
+branch = "executor-agnostic-hyper"
 [patch.crates-io.http-service-mock]
-git = "https://github.com/rustasync/http-service"
-branch = "master"
+git = "https://github.com/Nemo157/http-service"
+branch = "executor-agnostic-hyper"
