@@ -45,7 +45,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 
     let request_id = || bs58::encode(uuid::Uuid::new_v4().as_bytes()).into_string();
 
-    app.middleware(tide_slog::PerRequestLogger::new(log, move |logger| {
+    app.middleware(tide_slog::PerRequestLogger::new(log, move |logger, _cx| {
         logger.new(o!("req_id" => request_id()))
     }));
     app.middleware(tide_slog::SetSlogScopeLogger);

@@ -1290,7 +1290,7 @@ dependencies = [
 [[package]]
 name = "tide"
 version = "0.2.0"
-source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#b55990a4208c7fc8610f9fa88b8c88bbbdad4e13"
+source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1afa70aad2c8643778823d79578ecf2c3a3845e7"
 dependencies = [
  "fnv 1.0.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "futures-preview 0.3.0-alpha.17 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1307,7 +1307,7 @@ dependencies = [
 [[package]]
 name = "tide-core"
 version = "0.2.0"
-source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#b55990a4208c7fc8610f9fa88b8c88bbbdad4e13"
+source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1afa70aad2c8643778823d79578ecf2c3a3845e7"
 dependencies = [
  "futures-preview 0.3.0-alpha.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1320,7 +1320,7 @@ dependencies = [
 [[package]]
 name = "tide-forms"
 version = "0.1.0"
-source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#b55990a4208c7fc8610f9fa88b8c88bbbdad4e13"
+source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1afa70aad2c8643778823d79578ecf2c3a3845e7"
 dependencies = [
  "futures-preview 0.3.0-alpha.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1335,7 +1335,7 @@ dependencies = [
 [[package]]
 name = "tide-headers"
 version = "0.1.0"
-source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#b55990a4208c7fc8610f9fa88b8c88bbbdad4e13"
+source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1afa70aad2c8643778823d79578ecf2c3a3845e7"
 dependencies = [
  "futures-preview 0.3.0-alpha.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1346,7 +1346,7 @@ dependencies = [
 [[package]]
 name = "tide-log"
 version = "0.1.0"
-source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#b55990a4208c7fc8610f9fa88b8c88bbbdad4e13"
+source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1afa70aad2c8643778823d79578ecf2c3a3845e7"
 dependencies = [
  "futures-preview 0.3.0-alpha.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1357,7 +1357,7 @@ dependencies = [
 [[package]]
 name = "tide-querystring"
 version = "0.1.0"
-source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#b55990a4208c7fc8610f9fa88b8c88bbbdad4e13"
+source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1afa70aad2c8643778823d79578ecf2c3a3845e7"
 dependencies = [
  "futures-preview 0.3.0-alpha.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1370,7 +1370,7 @@ dependencies = [
 [[package]]
 name = "tide-slog"
 version = "0.1.0"
-source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#b55990a4208c7fc8610f9fa88b8c88bbbdad4e13"
+source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1afa70aad2c8643778823d79578ecf2c3a3845e7"
 dependencies = [
  "futures-preview 0.3.0-alpha.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
