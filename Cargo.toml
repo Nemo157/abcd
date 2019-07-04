@@ -80,15 +80,9 @@ version = "0.6.5"
 default-features = false
 features = ["v4"]
 
-[patch.crates-io.runtime]
-git = "https://github.com/Nemo157/runtime"
-branch = "provide-spawn-instance"
 [patch.crates-io.http-service]
-git = "https://github.com/Nemo157/http-service"
-branch = "executor-agnostic-hyper"
+git = "https://github.com/rustasync/http-service"
 [patch.crates-io.http-service-hyper]
-git = "https://github.com/Nemo157/http-service"
-branch = "executor-agnostic-hyper"
+git = "https://github.com/rustasync/http-service"
 [patch.crates-io.http-service-mock]
-git = "https://github.com/Nemo157/http-service"
-branch = "executor-agnostic-hyper"
+git = "https://github.com/rustasync/http-service"
