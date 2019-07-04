@@ -49,7 +49,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         logger.new(o!("req_id" => request_id()))
     }));
     app.middleware(tide_slog::SetSlogScopeLogger);
-    app.middleware(tide_slog::RequestLogger);
+    app.middleware(tide_slog::RequestLogger::new());
     abcd::setup(&mut app);
 
     let mut listener = runtime::net::TcpListener::bind("127.0.0.1:8000")?;
