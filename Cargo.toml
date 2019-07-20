@@ -79,8 +79,8 @@ default-features = false
 features = ["v4"]
 
 [patch.crates-io.http-service]
-git = "https://github.com/rustasync/http-service"
+git = "https://github.com/Nemo157/http-service"
+branch = "hyper-master"
 [patch.crates-io.http-service-hyper]
-git = "https://github.com/rustasync/http-service"
-[patch.crates-io.http-service-mock]
-git = "https://github.com/rustasync/http-service"
+git = "https://github.com/Nemo157/http-service"
+branch = "hyper-master"
