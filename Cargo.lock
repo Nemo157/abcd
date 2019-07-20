@@ -24,8 +24,8 @@ dependencies = [
  "slog-bunyan 2.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "slog-scope 4.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "slog-stdlog 3.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
- "tide 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
- "tide-slog 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
+ "tide 0.2.0 (git+https://github.com/rustasync/tide)",
+ "tide-slog 0.1.0 (git+https://github.com/rustasync/tide)",
  "uuid 0.6.5 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -1290,24 +1290,24 @@ dependencies = [
 [[package]]
 name = "tide"
 version = "0.2.0"
-source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1afa70aad2c8643778823d79578ecf2c3a3845e7"
+source = "git+https://github.com/rustasync/tide#f269183b58fe22922507e9ac5aead0226a8cc66b"
 dependencies = [
  "fnv 1.0.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "futures-preview 0.3.0-alpha.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http-service 0.2.0 (git+https://github.com/rustasync/http-service)",
  "route-recognizer 0.1.12 (registry+https://github.com/rust-lang/crates.io-index)",
- "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
- "tide-forms 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
- "tide-headers 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
- "tide-log 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
- "tide-querystring 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
+ "tide-core 0.2.0 (git+https://github.com/rustasync/tide)",
+ "tide-forms 0.1.0 (git+https://github.com/rustasync/tide)",
+ "tide-headers 0.1.0 (git+https://github.com/rustasync/tide)",
+ "tide-log 0.1.0 (git+https://github.com/rustasync/tide)",
+ "tide-querystring 0.1.0 (git+https://github.com/rustasync/tide)",
 ]
 
 [[package]]
 name = "tide-core"
 version = "0.2.0"
-source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1afa70aad2c8643778823d79578ecf2c3a3845e7"
+source = "git+https://github.com/rustasync/tide#f269183b58fe22922507e9ac5aead0226a8cc66b"
 dependencies = [
  "futures-preview 0.3.0-alpha.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1320,7 +1320,7 @@ dependencies = [
 [[package]]
 name = "tide-forms"
 version = "0.1.0"
-source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1afa70aad2c8643778823d79578ecf2c3a3845e7"
+source = "git+https://github.com/rustasync/tide#f269183b58fe22922507e9ac5aead0226a8cc66b"
 dependencies = [
  "futures-preview 0.3.0-alpha.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1329,55 +1329,55 @@ dependencies = [
  "multipart 0.16.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.91 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_urlencoded 0.5.5 (registry+https://github.com/rust-lang/crates.io-index)",
- "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
+ "tide-core 0.2.0 (git+https://github.com/rustasync/tide)",
 ]
 
 [[package]]
 name = "tide-headers"
 version = "0.1.0"
-source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1afa70aad2c8643778823d79578ecf2c3a3845e7"
+source = "git+https://github.com/rustasync/tide#f269183b58fe22922507e9ac5aead0226a8cc66b"
 dependencies = [
  "futures-preview 0.3.0-alpha.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "log 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
+ "tide-core 0.2.0 (git+https://github.com/rustasync/tide)",
 ]
 
 [[package]]
 name = "tide-log"
 version = "0.1.0"
-source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1afa70aad2c8643778823d79578ecf2c3a3845e7"
+source = "git+https://github.com/rustasync/tide#f269183b58fe22922507e9ac5aead0226a8cc66b"
 dependencies = [
  "futures-preview 0.3.0-alpha.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "log 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
+ "tide-core 0.2.0 (git+https://github.com/rustasync/tide)",
 ]
 
 [[package]]
 name = "tide-querystring"
 version = "0.1.0"
-source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1afa70aad2c8643778823d79578ecf2c3a3845e7"
+source = "git+https://github.com/rustasync/tide#f269183b58fe22922507e9ac5aead0226a8cc66b"
 dependencies = [
  "futures-preview 0.3.0-alpha.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "log 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.91 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_urlencoded 0.5.5 (registry+https://github.com/rust-lang/crates.io-index)",
- "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
+ "tide-core 0.2.0 (git+https://github.com/rustasync/tide)",
 ]
 
 [[package]]
 name = "tide-slog"
 version = "0.1.0"
-source = "git+https://github.com/Nemo157/tide?branch=slog-per-request-logger#1afa70aad2c8643778823d79578ecf2c3a3845e7"
+source = "git+https://github.com/rustasync/tide#f269183b58fe22922507e9ac5aead0226a8cc66b"
 dependencies = [
  "futures-preview 0.3.0-alpha.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "slog 2.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "slog-scope 4.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "slog-scope-futures 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)",
+ "tide-core 0.2.0 (git+https://github.com/rustasync/tide)",
 ]
 
 [[package]]
@@ -1758,13 +1758,13 @@ source = "git+https://github.com/rustasync/http-service#be5d91f9f360ae9cbf10d182
 "checksum take_mut 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)" = "f764005d11ee5f36500a149ace24e00e3da98b0158b3e2d53a7495660d3f4d60"
 "checksum tempfile 3.0.8 (registry+https://github.com/rust-lang/crates.io-index)" = "7dc4738f2e68ed2855de5ac9cdbe05c9216773ecde4739b2f095002ab03a13ef"
 "checksum thread_local 0.3.6 (registry+https://github.com/rust-lang/crates.io-index)" = "c6b53e329000edc2b34dbe8545fd20e55a333362d0a321909685a19bd28c3f1b"
-"checksum tide 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)" = "<none>"
-"checksum tide-core 0.2.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)" = "<none>"
-"checksum tide-forms 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)" = "<none>"
-"checksum tide-headers 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)" = "<none>"
-"checksum tide-log 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)" = "<none>"
-"checksum tide-querystring 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)" = "<none>"
-"checksum tide-slog 0.1.0 (git+https://github.com/Nemo157/tide?branch=slog-per-request-logger)" = "<none>"
+"checksum tide 0.2.0 (git+https://github.com/rustasync/tide)" = "<none>"
+"checksum tide-core 0.2.0 (git+https://github.com/rustasync/tide)" = "<none>"
+"checksum tide-forms 0.1.0 (git+https://github.com/rustasync/tide)" = "<none>"
+"checksum tide-headers 0.1.0 (git+https://github.com/rustasync/tide)" = "<none>"
+"checksum tide-log 0.1.0 (git+https://github.com/rustasync/tide)" = "<none>"
+"checksum tide-querystring 0.1.0 (git+https://github.com/rustasync/tide)" = "<none>"
+"checksum tide-slog 0.1.0 (git+https://github.com/rustasync/tide)" = "<none>"
 "checksum time 0.1.42 (registry+https://github.com/rust-lang/crates.io-index)" = "db8dcfca086c1143c9270ac42a2bbd8a7ee477b78ac8e45b19abfb0cbede4b6f"
 "checksum tokio-buf 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "8fb220f46c53859a4b7ec083e41dec9778ff0b1851c0942b211edb89e0ccdc46"
 "checksum tokio-io 0.1.12 (registry+https://github.com/rust-lang/crates.io-index)" = "5090db468dad16e1a7a54c8c67280c5e4b544f3d3e018f0b913b400261f85926"

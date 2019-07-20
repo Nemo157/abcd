@@ -67,12 +67,10 @@ default-features = false
 version = "3.0.2"
 default-features = false
 [dependencies.tide]
-git = "https://github.com/Nemo157/tide"
-branch = "slog-per-request-logger"
+git = "https://github.com/rustasync/tide"
 default-features = false
 [dependencies.tide-slog]
-git = "https://github.com/Nemo157/tide"
-branch = "slog-per-request-logger"
+git = "https://github.com/rustasync/tide"
 default-features = false
 features = ["scope"]
 [dependencies.uuid]

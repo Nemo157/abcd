@@ -8,9 +8,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         .build()
         .fuse();
 
-    let log = slog::Logger::root(drain, o!("service" => "abcd"));
+    let logger = slog::Logger::root(drain, o!("service" => "abcd"));
 
-    let _guard = slog_scope::set_global_logger(log.clone());
+    let _guard = slog_scope::set_global_logger(logger.clone());
     slog_stdlog::init()?;
 
     std::panic::set_hook(Box::new(|info| {
@@ -45,7 +45,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 
     let request_id = || bs58::encode(uuid::Uuid::new_v4().as_bytes()).into_string();
 
-    app.middleware(tide_slog::PerRequestLogger::new(log, move |logger, _cx| {
+    app.middleware(tide_slog::PerRequestLogger::with_setup(move |_cx| {
         logger.new(o!("req_id" => request_id()))
     }));
     app.middleware(tide_slog::SetSlogScopeLogger);
